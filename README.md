@@ -18,8 +18,8 @@
 - **Otros:** JavaScript, Git, Nodemailer
 
 ## Capturas de Pantalla
-<img src="/screenshots/paginadeInicio.png alt="Página de Inicio"> 
-<img src="/screenshots/paginadeInicio2.png alt="Página de Inicio2">
+![Página de inicio](screenshots/paginadeInicio.png)
 ![Página de inicio](screenshots/paginadeInicio2.png)
+![Página de inicio](screenshots/paginadeInicio3.png)
 
 
