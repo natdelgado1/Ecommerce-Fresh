@@ -20,6 +20,6 @@
 ## Capturas de Pantalla
 <img src="/screenshots/paginadeInicio.png alt="Página de Inicio"> 
 <img src="/screenshots/paginadeInicio2.png alt="Página de Inicio2">
-<img src="/screenshots/paginadeInicio3.png alt="Página de Inicio3">
+![Página de inicio](screenshots/paginadeInicio2.png)
 
 
