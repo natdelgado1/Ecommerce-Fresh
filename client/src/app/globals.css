@@ -1,0 +1,28 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@font-face {
+  font-family: Candal;
+  src: url("/fonts/Candal-Regular.ttf");
+}
+@font-face {
+  font-family: Kanit;
+  src: url("/fonts/Kanit-Regular.ttf");
+}
+
+.font-Kanit {
+  font-family: Kanit;
+}
+.font-candal{
+  font-family: Candal;
+}
+@keyframes marquee {
+  0% {
+    transform: translate(0, 0);
+  }
+
+  100% {
+    transform: translate(-100%, 0);
+  }
+}
