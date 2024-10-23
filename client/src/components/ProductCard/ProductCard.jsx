@@ -20,30 +20,29 @@ export default function ProductCard({ product }) {
 
   return (
     <div
-      className=" mx-4 my-4 rounded-lg shadow-md"
+      className="bg-white mx-2 rounded-lg shadow-md overflow-hidden p-4 cursor-pointer"
       onClick={() => {
         loadProduct(product._id);
       }}
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
     >
-      <div className="block rounded-t-lg h-[200px] overflow-hidden">
         {isHovered ? (
           <img
             src={`${imagesURL}/products/${product._id}/principal.jpg`}
             alt={`Image of ${product.title}`}
+            className="w-full h-48 object-cover"
           />
         ) : (
           <img
-            className="hover:scale-125 transition-all duration-300 ease-in-out transform"
+            className="hover:scale-125 object-cover w-full h-48 transition-all duration-300 ease-in-out transform"
             src={`${imagesURL}/products/${product._id}/1.jpg`}
             alt={`Image of ${product.title}`}
           />
         )}
-      </div>
-      <div className="p-3">
-        <p className="text-lg text-[#000000]">{product.title}</p>
-        <span className="text-[#FFA07A]">{format(product.price)}</span>
+      <div className="p-4">
+      <h4 className="font-semibold mb-2">{product.title}</h4>
+      <p className="text-[#FFA07A] font-bold">{product.price}</p>
       </div>
     </div>
   );
