@@ -36,8 +36,8 @@ export default function PanelLanzamientos() {
   };
 
   return (
-    <div>
-      <h1 className="text-center text-xl font-bold pb-3 text-[#FFA07A]">LANZAMIENTOS</h1>
+    <section className="mb-12">
+      <h3 className="text-2xl font-semibold mb-4">LANZAMIENTOS</h3>
       {products.length > 0 && (
         <Carousel
           responsive={responsive}
@@ -51,10 +51,12 @@ export default function PanelLanzamientos() {
           itemClass="carousel-item-padding-40-px"
         >
           {products.map((product, index) => (
-            <ProductCard key={index} product={product} />
+            <div className="grid gap-2">
+              <ProductCard key={index} product={product} />
+            </div>
           ))}
         </Carousel>
       )}
-    </div>
+    </section>
   );
 }
