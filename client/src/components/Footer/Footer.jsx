@@ -7,48 +7,89 @@ import {
   faWhatsapp,
 } from "@fortawesome/free-brands-svg-icons";
 import { faEnvelope, faLocationPin } from "@fortawesome/free-solid-svg-icons";
+import { useState } from "react";
+import { Input } from "@/components/ui/input";
+import { Button } from "@mui/material/Button";
 
 const Footer = () => {
+  const [email, setEmail] = useState("");
+  const [mensaje, setMensaje] = useState("");
+
+  const manejarSubmit = (e) => {
+    e.preventDefault();
+
+    // Validación básica del email
+    const regexEmail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!regexEmail.test(email)) {
+      setMensaje("Por favor, ingresa un email válido.");
+      return;
+    }
+
+    // Simulamos una suscripción
+    setMensaje("Gracias por suscribirte!");
+
+    // Reiniciar el campo de email después del envío
+    setEmail("");
+  };
   return (
-    <footer className="bg-[#FFA07A]  flex text-white">
-      <div className="flex gap-4 items-center  justify-between p-3 px-[30px] w-full ml-20">
-        <div className="flex-1 inline-grid self-start">
-          <h1 className="text-xl">Información</h1>
-          <Link href="/store">- Inicio</Link>
-          <Link href="/store/devoluciones">- Cambios y devoluciones</Link>
-          <Link href="store/contacto" >- Entrar en contacto</Link>
-        </div>
-          
-        <div className="flex-1  inline-grid self-start ml-20">
-          <Link href={"https://wa.me/message/NG2GF3C4WCGFI1"}>
-            <FontAwesomeIcon icon={faWhatsapp} />
-            <span className="ml-4">+595 971 331 257</span>
-          </Link>
-          <Link href={"mailto:freshencar@gmail.com"}>
-            <FontAwesomeIcon icon={faEnvelope} />
-            <span className="ml-4">freshencar@gmail.com</span>
-          </Link>
+    <footer className="bg-[#FFA07A] text-white mt-12">
+      <div className="container mx-auto px-4 py-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
           <div>
-            <FontAwesomeIcon icon={faLocationPin} />
-            <span className="ml-4">
-              Cambyretá - Barrio San José, calle S/N casi Los Inmigrantes
-            </span>
+            <h4 className="font-semibold mb-4">Información</h4>
+            <ul className="space-y-2">
+              <li>
+                <a href="/store" className="hover:underline">
+                  Inicio
+                </a>
+              </li>
+              <li>
+                <a href="/store/devoluciones" className="hover:underline">
+                  Cambios y devoluciones
+                </a>
+              </li>
+              <li>
+                <a href="/store/contacto" className="hover:underline">
+                  Entrar en contacto
+                </a>
+              </li>
+            </ul>
           </div>
-          <div className="flex-1 flex  gap-4 content-start self-start ">
-            <button>
-              <FontAwesomeIcon
-                className="h-[16px] w-[16px]"
-                icon={faInstagram}
-              /> <span className="ml-2">Instagram</span>
-            </button>
+          <div>
+            <h4 className="font-semibold mb-4">Contacto</h4>
+            <p>+595 971 331 257</p>
+            <p>freshencar@gmail.com</p>
+            <p>Cambyretá - Barrio San José, calle S/N casi Los Inmigrantes</p>
           </div>
-          <div className="flex-1 flex  gap-4 content-start self-start ">
-            <button>
-              <FontAwesomeIcon
-                className="h-[16px] w-[16px]"
-                icon={faFacebookF}
-              /> <span className="ml-2">Facebook</span>
-            </button>
+          <div>
+            <h4 className="font-semibold mb-4">Redes Sociales</h4>
+            <div className="flex space-x-4">
+              <a href="#" className="hover:text-[#FFD700]">
+                Instagram
+              </a>
+              <a href="#" className="hover:text-[#FFD700]">
+                Facebook
+              </a>
+            </div>
+          </div>
+          <div>
+            <h4 className="font-semibold mb-4">Newsletter</h4>
+            <form className="flex">
+              <Input
+                type="email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                placeholder="Tu email"
+                className="rounded-r-none border p-2"
+                required
+              />
+              <button type="submit" className="pl-3 rounded-l-none">
+                Suscribir
+              </button>
+            </form>
+            {mensaje && (
+              <p className="mt-2 text-sm text-[#FFA07A]">{mensaje}</p>
+            )}
           </div>
         </div>
       </div>
