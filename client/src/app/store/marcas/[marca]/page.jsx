@@ -29,10 +29,13 @@ const marcaPage = () => {
       <p className="p-3 text-4xl py-5 font-bold tracking-wider">
         {marca.name}{" "}
       </p>
-      <div className="w-full  justify-start">
-        {products.map((product, index) => {
-          return <ProductCard key={index} product={product} />;
-        })}
+      <div className="w-full  justify-start ">
+        <div className="w-full  justify-start grid grid-cols-4">
+          {products.map((product, index) => {
+            return <ProductCard key={index} product={product} />;
+          })}
+        </div>
+        ;
       </div>
     </div>
   );
