@@ -32,6 +32,44 @@ const CheckoutPage = () => {
   const [address, setAddress] = useState("");
   const [email, setEmail] = useState("");
   const [cel, setCel] = useState("");
+  const [isOpen, setIsOpen] = useState(false);
+
+
+  useEffect(() => {
+    const checkIfOpen = () => {
+      const now = new Date();
+      const currentDay = now.getDay(); // Domingo = 0, Lunes = 1, ..., Sábado = 6
+      const currentHour = now.getHours();
+      const currentMinutes = now.getMinutes();
+
+      // Horario de apertura y cierre (09:00 AM - 06:00 PM)
+      const openingHour = 9;
+      const closingHour = 18;
+
+      // Solo de lunes a sábado
+      if (currentDay >= 1 && currentDay <= 6) {
+        if (
+          (currentHour > openingHour && currentHour < closingHour) || 
+          (currentHour === openingHour && currentMinutes >= 0) ||
+          (currentHour === closingHour && currentMinutes === 0)
+        ) {
+          setIsOpen(true);
+        } else {
+          setIsOpen(false);
+        }
+      } else {
+        setIsOpen(false); // Cerrado los domingos
+      }
+    };
+
+    // Verifica inmediatamente al cargar la página
+    checkIfOpen();
+
+    // Verifica cada minuto si el estado cambia
+    const intervalId = setInterval(checkIfOpen, 60000);
+
+    return () => clearInterval(intervalId); // Limpia el intervalo al desmontar el componente
+  }, []);
 
   function format(num) {
     if (num) {
@@ -56,6 +94,7 @@ const CheckoutPage = () => {
     setCel(user?.telefono || "");
   }, [user]);
 
+  
   const confirmarPedido = (e) => {
     e.preventDefault();
     const venta = {
@@ -90,7 +129,7 @@ const CheckoutPage = () => {
           if (user) {
             router.push("/store/user/mi-cuenta");
           } else {
-            alert("¡Su pedido ha sido registrado!");
+            alert("¡Su pedido ha sido registrado nos contactaremos con usted!");
             router.push("/store");
           }
         })
@@ -102,7 +141,7 @@ const CheckoutPage = () => {
 
   return cart.length > 0 ? (
     <div className="w-full p-4">
-      <h1 className="text-5xl p-3 text-4xl py-5 font-bold tracking-wider text-center py-8">Confirmar pedidos</h1>
+      <h1 className="text-5xl p-3  font-bold tracking-wider text-center py-8">Confirmar pedidos</h1>
       <div className="flex justify-evenly">
         <form onSubmit={confirmarPedido} className="">
           <p>
@@ -276,7 +315,7 @@ const CheckoutPage = () => {
           <div className="mt-4 w-[80%]">
             <p className="text-sm">
               <FontAwesomeIcon color="grey" icon={faClock} />
-              ¡Cerrado ahora!
+              {isOpen ? ' ¡Abierto ahora!' : ' ¡Cerrado ahora!'}
             </p>
           </div>
           <div className="mt-4 w-[80%]">
