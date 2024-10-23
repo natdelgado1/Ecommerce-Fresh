@@ -71,20 +71,20 @@ const obtenerVentaPorCliente = async (req, res) => {
 
 async function enviarCorreoVenta(ventaId) {
     try {
-        const venta = await Venta.findById(ventaId).populate("detailProduct.product");
+        const venta = await Venta.findOne({_id: ventaId}).populate("detailProduct.product");
 
         const transporter = nodemailer.createTransport({
             host: "smtp.gmail.com",
             port: 587,
             secure: false,
             auth: {
-                user: "gonzalezestefi094@gmail.com",
-                pass: "sgdo rbym abhn tbda ",
+                user: "freshencar@gmail.com",
+                pass: process.env.EMAIL_SMTP_TOKEN,
         }, 
         });
 
         const mensaje = {
-            from: "gonzalezestefi094@gmail.com",
+            from: "freshencar@gmail.com",
             to: venta.email,
             subject: "Venta realizada exitosamente",
             html: `
@@ -92,7 +92,7 @@ async function enviarCorreoVenta(ventaId) {
             <p>Tu compra se ha realizado con éxito.</p>
             <p>Aquí está la información de tu compra:</p>
             <ul>
-                ${venta.detailProduct.map(item => `<li>${item.cantidad} x ${item.product.name} - ${item.price}</li>`).join('')}
+                ${venta.detailProduct.map(item => `<li>${item.cantidad} x ${item.product.title} - ${item.price}</li>`).join('')}
             </ul>
             <p>¡Gracias por tu compra!</p>
         `,
