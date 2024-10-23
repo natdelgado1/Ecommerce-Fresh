@@ -13,7 +13,7 @@ app.use(cookieParser());
 app.use(
     cors({
         credentials: true,
-        origin: ["*"]
+        origin: ["http://localhost:3000","https://fresh-ecommerce-sigma.vercel.app"]
     })
 )
 
