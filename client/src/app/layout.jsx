@@ -10,12 +10,16 @@ import "tw-elements-react/dist/css/tw-elements-react.min.css";
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
-      <body suppressHydrationWarning={true} className={` font-Kanit subpixel-antialiased bg-[#ffffff] h-full`}>
+      <body suppressHydrationWarning={true} >
         <UserProvider>
           <CartProvider>
+            <div className="min-h-screen bg-[#FFF5E1]">
             <TopHeader />
+            <div className="container mx-auto px-4 py-8">
             {children}
+            </div>
             <Footer />
+          </div>
           </CartProvider>
         </UserProvider>
       </body>
